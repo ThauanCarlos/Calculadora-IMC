@@ -1,1 +1,33 @@
 
+name: Run Python Script
+
+on:
+  push:
+    branches:
+      - main  # Altere para o nome da sua branch, se necessário
+  # Se quiser rodar em um schedule, adicione:
+  # schedule:
+  #   - cron: '0 0 * * *'  # Exemplo: executa diariamente à meia-noite
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8  # Ou a versão do Python que você está usando
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Se você tiver um arquivo requirements.txt, descomente a linha abaixo
+          # pip install -r requirements.txt
+
+      - name: Run calcularIMC.py
+        run: |
+          python calcularIMC.py
