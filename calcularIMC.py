@@ -38,17 +38,26 @@ def obter_dados_usuario():
             peso = float(input("Digite o seu peso (em kg): "))
             altura = float(input("Digite a sua altura (em metros): "))
             if peso <= 0 or altura <= 0:
-                raise ValueError("Peso e altura devem ser números positivos.")
-            return peso, altura
-        except ValueError as e:
-            print(f"Entrada inválida: {e}. Tente novamente.")
+                print("Peso e altura devem ser números positivos. Por favor, insira valores maiores que 0.")
+            else:
+                return peso, altura
+        except ValueError:
+            print("Entrada inválida. Por favor, insira números válidos para peso e altura.")
+        except KeyboardInterrupt:
+            print("\nOperação interrompida. Saindo do programa.")
+            break
 
-# Solicitar entrada do usuário
-peso, altura = obter_dados_usuario()
+# Função principal
+def main():
+    # Solicitar entrada do usuário
+    peso, altura = obter_dados_usuario()
+    if peso and altura:
+        # Calcular IMC
+        imc = calcular_imc(peso, altura)
+    
+        # Interpretar e exibir o resultado
+        interpretacao = interpretar_imc(imc)
+        print(f"Seu IMC é {imc:.2f}, o que é considerado: {interpretacao}")
 
-# Calcular IMC
-imc = calcular_imc(peso, altura)
-
-# Interpretar e exibir o resultado
-interpretacao = interpretar_imc(imc)
-print(f"Seu IMC é {imc:.2f}, o que é considerado: {interpretacao}")
+if __name__ == "__main__":
+    main()
