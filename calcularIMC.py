@@ -1,10 +1,20 @@
 # Calcula IMC
 
 def calcular_imc(peso, altura):
-    imc = peso / (altura ** 2)
-    return imc
+    """
+    Calcula o Índice de Massa Corporal (IMC) com base no peso e altura fornecidos.
+    :param peso: Peso da pessoa em kg.
+    :param altura: Altura da pessoa em metros.
+    :return: Valor do IMC.
+    """
+    return peso / (altura ** 2)
 
 def interpretar_imc(imc):
+    """
+    Interpreta o valor do IMC e retorna a classificação.
+    :param imc: Valor calculado do IMC.
+    :return: Classificação de acordo com o valor do IMC.
+    """
     if imc < 18.5:
         return "Abaixo do peso"
     elif imc < 24.9:
@@ -18,9 +28,23 @@ def interpretar_imc(imc):
     else:
         return "Obesidade Grau III"
 
+def obter_dados_usuario():
+    """
+    Solicita o peso e altura do usuário e valida se os dados são numéricos.
+    :return: Peso e altura válidos do usuário.
+    """
+    while True:
+        try:
+            peso = float(input("Digite o seu peso (em kg): "))
+            altura = float(input("Digite a sua altura (em metros): "))
+            if peso <= 0 or altura <= 0:
+                raise ValueError("Peso e altura devem ser números positivos.")
+            return peso, altura
+        except ValueError as e:
+            print(f"Entrada inválida: {e}. Tente novamente.")
+
 # Solicitar entrada do usuário
-peso = float(input("Digite o seu peso (em kg): "))
-altura = float(input("Digite a sua altura (em metros): "))
+peso, altura = obter_dados_usuario()
 
 # Calcular IMC
 imc = calcular_imc(peso, altura)
